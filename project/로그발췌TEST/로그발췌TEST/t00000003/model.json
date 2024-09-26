@@ -1,0 +1,325 @@
+{
+  "contents": [
+    {
+      "id": "UFCjy",
+      "script": "\"로그발췌\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "Title",
+      "comment": "",
+      "next": "date_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "date_0"
+    },
+    {
+      "id": "date_0",
+      "script": "DATETIME.Today()",
+      "parameters": {
+        "Format": "%Y-%m-%d",
+        "Year": "0",
+        "Month": "0",
+        "Day": "0",
+        "Hour": "0",
+        "Minute": "0",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "Today: date_0",
+      "comment": "",
+      "next": "nVbZJ",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Today",
+      "PreNext": "msgbox_1"
+    },
+    {
+      "id": "nVbZJ",
+      "script": "path = 'C:\\logs\\BA-Player'+'\\\\'+date_0+'\\\\'\r\nprint('path :', path)",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "collection_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "end"
+    },
+    {
+      "id": "collection_0",
+      "script": "FILE.GetFiles()",
+      "parameters": {
+        "path": "{{path}}",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "GetFileList: collection_0",
+      "comment": "",
+      "next": "E5fjZ",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "FILE/GetFileList",
+      "PreNext": "end"
+    },
+    {
+      "id": "E5fjZ",
+      "script": "fileName = max(collection_0)\r\nprint('fileName :', fileName)",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "text_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "end"
+    },
+    {
+      "id": "text_0",
+      "script": "FILE.ReadAllTextFromFile()",
+      "parameters": {
+        "path": "{{path+fileName}}",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "ReadText: text_0",
+      "comment": "",
+      "next": "msgbox_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "FILE/ReadText",
+      "PreNext": "end"
+    },
+    {
+      "id": "msgbox_0",
+      "script": "WIN32.MessageBox()",
+      "parameters": {
+        "text": "{{text_0}}",
+        "title": "",
+        "timeout": "None",
+        "align": "CENTER",
+        "Description": "",
+        "Activation": "false",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "MessageBox",
+      "comment": "",
+      "next": "Plng2",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/MessageBox",
+      "PreNext": "end"
+    },
+    {
+      "id": "Plng2",
+      "script": "rev_logs = list(reversed(text_0.split('[CURRENT-CONTENT] onerror_00')[0].split('\\n')))\r\n# print('rev_logs :', rev_logs)",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "append_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "brC9g"
+    },
+    {
+      "id": "brC9g",
+      "script": "log_exts = []",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "vdb10",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "end"
+    },
+    {
+      "id": "vdb10",
+      "script": "get_log_extracts(log_exts, rev_logs)",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "HAOLc",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "end"
+    },
+    {
+      "id": "HAOLc",
+      "script": "logs = list(reversed(log_exts))",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "h7A3B",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "end"
+    },
+    {
+      "id": "append_0",
+      "script": "FILE.WriteTextFile()",
+      "parameters": {
+        "text": "{{str(rev_logs)}}",
+        "path": "C:\\RPA\\로그발췌TEST\\reversed.txt",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "false",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "WriteTextFile",
+      "comment": "",
+      "next": "msgbox_1",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "FILE/WriteTextFile",
+      "PreNext": "brC9g"
+    },
+    {
+      "id": "msgbox_1",
+      "script": "WIN32.MessageBox()",
+      "parameters": {
+        "text": "!",
+        "title": "",
+        "timeout": "None",
+        "align": "CENTER",
+        "Description": "",
+        "Activation": "false",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "MessageBox",
+      "comment": "",
+      "next": "brC9g",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/MessageBox",
+      "PreNext": "brC9g"
+    },
+    {
+      "id": "h7A3B",
+      "script": "G['logs'] = '\\n'.join(logs)",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000003",
+        "taskname": "로그발췌"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "end"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__",
+    "DATETIME",
+    "WIN32",
+    "FILE",
+    "WEB"
+  ]
+}

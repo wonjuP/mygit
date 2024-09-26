@@ -1,0 +1,356 @@
+{
+  "contents": [
+    {
+      "id": "HRCNq",
+      "script": "G['Task']=\"Main Task\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "Title",
+      "comment": "",
+      "next": "s6wrC",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "end"
+    },
+    {
+      "id": "s6wrC",
+      "script": "G['isSuccess'] = True",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "작업성공",
+      "comment": "",
+      "next": "browser_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "Z2ZDZ"
+    },
+    {
+      "id": "Z2ZDZ",
+      "script": "",
+      "parameters": {
+        "Description": "",
+        "Activation": "false",
+        "ItemColor": "Blue",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "***오류Test***",
+      "comment": "",
+      "next": "YQR99",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "end"
+    },
+    {
+      "id": "onerror_00",
+      "script": "PRE-PROCESSING!SetOnError()",
+      "parameters": {
+        "importance": "100",
+        "comment": "On Error",
+        "MaxCount": "50",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "OnError",
+      "comment": "",
+      "next": "ehzQj",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/OnError",
+      "PreNext": "H9QJC"
+    },
+    {
+      "id": "oE0Az",
+      "script": "COMMON.create_error()",
+      "parameters": {
+        "comment": "에러발생",
+        "enterOnError": "False",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "UserException",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/UserException"
+    },
+    {
+      "id": "H9QJC",
+      "script": "G['isSuccess'] = False",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "작업실패",
+      "comment": "",
+      "next": "date_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "oE0Az"
+    },
+    {
+      "id": "date_0",
+      "script": "DATETIME.Today()",
+      "parameters": {
+        "Format": "(%Y-%m-%d %H-%M-%S)",
+        "Year": "0",
+        "Month": "0",
+        "Day": "0",
+        "Hour": "0",
+        "Minute": "0",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "Today: date_0",
+      "comment": "",
+      "next": "vf2XE",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Today",
+      "PreNext": "jB5uh"
+    },
+    {
+      "id": "jB5uh",
+      "script": "path = 'C:\\logs\\Screenshots'+'\\\\'+p_id\r\nfileName = 'Screenshot'+date_0\r\next = 'png'",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "Ee6nK",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "end"
+    },
+    {
+      "id": "Ee6nK",
+      "script": "CaptureScreen(path, fileName, ext)",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "OMBd7",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "end"
+    },
+    {
+      "id": "vf2XE",
+      "script": "p_id = 'RPA-SO-015'",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "Yellow",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "(1) 프로그램ID 변경",
+      "comment": "",
+      "next": "jB5uh",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "jB5uh"
+    },
+    {
+      "id": "ehzQj",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000003",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "로그발췌",
+      "predefine-task": "로그발췌",
+      "comment": "",
+      "next": "H9QJC",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process",
+      "PreNext": "H9QJC"
+    },
+    {
+      "id": "OMBd7",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000004",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "성공여부",
+      "predefine-task": "성공여부",
+      "comment": "",
+      "next": "oE0Az",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process"
+    },
+    {
+      "id": "YQR99",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000004",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "성공여부",
+      "predefine-task": "성공여부",
+      "comment": "",
+      "next": "msgbox_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process",
+      "PreNext": "end"
+    },
+    {
+      "id": "browser_0",
+      "script": "WEB.Open()",
+      "parameters": {
+        "browser": "Chrome",
+        "url": "http://www.nave",
+        "encoding": "utf-8",
+        "reuse": "True",
+        "downloadDialog": "True",
+        "timeout": "60",
+        "headless": "False",
+        "userData": "None",
+        "infoBar": "True",
+        "driverPath": "",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "OpenBrowser",
+      "comment": "",
+      "next": "Z2ZDZ",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/OpenBrowser",
+      "PreNext": "Z2ZDZ"
+    },
+    {
+      "id": "msgbox_0",
+      "script": "WIN32.MessageBox()",
+      "parameters": {
+        "text": "!",
+        "title": "",
+        "timeout": "None",
+        "align": "CENTER",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "Yellow",
+        "BreakPoint": "false",
+        "filename": "t00000001",
+        "taskname": "MainTask"
+      },
+      "title": "MessageBox",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/MessageBox"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__",
+    "COMMON",
+    "EXCEL",
+    "WIN32",
+    "MSAA",
+    "DATETIME",
+    "WEB"
+  ]
+}

@@ -1,0 +1,643 @@
+{
+  "contents": [
+    {
+      "id": "OHteM",
+      "script": "\"성공여부\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Title",
+      "comment": "",
+      "next": "date_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "date_0"
+    },
+    {
+      "id": "append_0",
+      "script": "FILE.WriteTextFile()",
+      "parameters": {
+        "text": "{{G['Task']}}",
+        "path": "{{nas+year+'\\\\'+month+'\\\\'+result+'\\\\'+file}}",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "Yellow",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "WriteTextFile: 결과파일 생성       (5) 변수명 확인",
+      "comment": "",
+      "next": "msgbox_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "FILE/WriteTextFile",
+      "PreNext": "end"
+    },
+    {
+      "id": "date_0",
+      "script": "DATETIME.Today()",
+      "parameters": {
+        "Format": "%Y_%m_%d_%H%M%S",
+        "Year": "0",
+        "Month": "0",
+        "Day": "0",
+        "Hour": "0",
+        "Minute": "0",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Today: date_0",
+      "comment": "",
+      "next": "saxr7",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Today",
+      "PreNext": "dcN1w"
+    },
+    {
+      "id": "dcN1w",
+      "script": "file = date_0+'_'+taskName+'.txt'\r\nprint('파일명 :', file)",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "파일명",
+      "comment": "",
+      "next": "year",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "year"
+    },
+    {
+      "id": "year",
+      "script": "DATETIME.Today()",
+      "parameters": {
+        "Format": "%Y",
+        "Year": "0",
+        "Month": "0",
+        "Day": "0",
+        "Hour": "0",
+        "Minute": "0",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Today: year",
+      "comment": "",
+      "next": "month",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Today",
+      "PreNext": "end"
+    },
+    {
+      "id": "month",
+      "script": "DATETIME.Today()",
+      "parameters": {
+        "Format": "%m월",
+        "Year": "0",
+        "Month": "0",
+        "Day": "0",
+        "Hour": "0",
+        "Minute": "0",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Today: month",
+      "comment": "",
+      "next": "okod8",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Today",
+      "PreNext": "twKyC"
+    },
+    {
+      "id": "twKyC",
+      "script": "If(G['isSuccess'])",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "Black",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Decision",
+      "comment": "",
+      "next": "rt4ZI",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Decision",
+      "PreNext": "rt4ZI",
+      "else": "LDKb1"
+    },
+    {
+      "id": "msgbox_0",
+      "script": "WIN32.MessageBox()",
+      "parameters": {
+        "text": "DONE",
+        "title": "테스트 후 Deactive 필수 (2)!",
+        "timeout": "None",
+        "align": "CENTER",
+        "Description": "",
+        "Activation": "false",
+        "ItemColor": "Red",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "MessageBox",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/MessageBox",
+      "PreNext": "end"
+    },
+    {
+      "id": "exist_2",
+      "script": "FILE.Exists()",
+      "parameters": {
+        "path": "{{nas+year+'\\\\'+month+'\\\\'+result}}",
+        "waiting": "False",
+        "timeout": "60000",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Exists: exist_2(정상 폴더)",
+      "comment": "",
+      "next": "Rcav1",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "FILE/Exists",
+      "PreNext": "end"
+    },
+    {
+      "id": "exist_3",
+      "script": "FILE.Exists()",
+      "parameters": {
+        "path": "{{nas+year+'\\\\'+month+'\\\\'+result}}",
+        "waiting": "False",
+        "timeout": "60000",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Exists: exist_3(오류 폴더)",
+      "comment": "",
+      "next": "ipVqa",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "FILE/Exists",
+      "PreNext": "end"
+    },
+    {
+      "id": "Rcav1",
+      "script": "If(exist_2)",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "Black",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Decision",
+      "comment": "",
+      "next": "KTQhS",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Decision",
+      "else": "yWzrM",
+      "PreNext": "yWzrM"
+    },
+    {
+      "id": "ipVqa",
+      "script": "If(exist_3)",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "Black",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Decision",
+      "comment": "",
+      "next": "ZH4oT",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Decision",
+      "else": "yWzrM",
+      "PreNext": "yWzrM"
+    },
+    {
+      "id": "yWzrM",
+      "script": "FILE.CreateDirectory()",
+      "parameters": {
+        "path": "{{nas+year}}",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "CreateDirectory: 연 폴더 생성",
+      "comment": "",
+      "next": "yYjP0",
+      "except": {
+        "method": "jump",
+        "param": "QDxtC"
+      },
+      "command": "FILE/CreateDirectory",
+      "PreNext": "exist_1"
+    },
+    {
+      "id": "yYjP0",
+      "script": "COMMON.Wait()",
+      "parameters": {
+        "term": "2000",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "QDxtC",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Wait",
+      "PreNext": "exist_1"
+    },
+    {
+      "id": "QDxtC",
+      "script": "FILE.CreateDirectory()",
+      "parameters": {
+        "path": "{{nas+year+'\\\\'+month}}",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "CreateDirectory: 월 폴더 생성",
+      "comment": "",
+      "next": "Q6Dib",
+      "except": {
+        "method": "jump",
+        "param": "eA0qz"
+      },
+      "command": "FILE/CreateDirectory",
+      "PreNext": "end"
+    },
+    {
+      "id": "Q6Dib",
+      "script": "COMMON.Wait()",
+      "parameters": {
+        "term": "2000",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "eA0qz",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Wait",
+      "PreNext": "append_0"
+    },
+    {
+      "id": "KTQhS",
+      "script": " '정상폴더 있음'",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "append_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "ZH4oT",
+      "script": "'오류폴더 있음'",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "append_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "rt4ZI",
+      "script": "result = '정상'",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "u1qpw",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "exist_2"
+    },
+    {
+      "id": "LDKb1",
+      "script": "result = '오류'",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "Iacub",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "exist_3"
+    },
+    {
+      "id": "okod8",
+      "script": "nas = '\\\\\\\\\\\\172.30.1.16\\\\운영\\\\RPA수행결과'+'\\\\'\r\nprint('nas :', nas)",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "Yellow",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "NAS경로",
+      "comment": "",
+      "next": "msgbox_1",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "twKyC"
+    },
+    {
+      "id": "msgbox_1",
+      "script": "WIN32.MessageBox()",
+      "parameters": {
+        "text": "{{nas}}",
+        "title": "테스트 후 Deactive 필수 (1)!",
+        "timeout": "None",
+        "align": "CENTER",
+        "Description": "",
+        "Activation": "false",
+        "ItemColor": "Red",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "MessageBox",
+      "comment": "",
+      "next": "twKyC",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/MessageBox",
+      "PreNext": "twKyC"
+    },
+    {
+      "id": "eA0qz",
+      "script": "FILE.CreateDirectory()",
+      "parameters": {
+        "path": "{{nas+year+'\\\\'+month+'\\\\'+result}}",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "CreateDirectory: 결과 폴더 생성",
+      "comment": "",
+      "next": "VGvbA",
+      "except": {
+        "method": "jump",
+        "param": "append_0"
+      },
+      "command": "FILE/CreateDirectory",
+      "PreNext": "append_0"
+    },
+    {
+      "id": "VGvbA",
+      "script": "COMMON.Wait()",
+      "parameters": {
+        "term": "2000",
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "append_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Wait",
+      "PreNext": "append_0"
+    },
+    {
+      "id": "u1qpw",
+      "script": "G['Task'] = ''",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "Yellow",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "(3) 오류Task 이름 담을 변수명 확인",
+      "comment": "",
+      "next": "exist_2",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "exist_2"
+    },
+    {
+      "id": "Iacub",
+      "script": "G['Task'] = G['Task']+'  테스크에서 오류가 발생했습니다.\\n'",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "Yellow",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "(4) 오류Task 이름 담을 변수명 확인",
+      "comment": "",
+      "next": "RaDoB",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "exist_3"
+    },
+    {
+      "id": "saxr7",
+      "script": "taskName = 'RPA-SO-015_인터넷미수령당첨금'",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "Yellow",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "(2) 과제명 확인",
+      "comment": "",
+      "next": "dcN1w",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "dcN1w"
+    },
+    {
+      "id": "RaDoB",
+      "script": "G['Task'] = G['Task'] + G['logs']",
+      "parameters": {
+        "Description": "",
+        "Activation": "true",
+        "ItemColor": "White",
+        "BreakPoint": "false",
+        "filename": "t00000004",
+        "taskname": "성공여부"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "exist_3",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process",
+      "PreNext": "exist_3"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__",
+    "FILE",
+    "EXCEL",
+    "DATETIME",
+    "WIN32",
+    "COMMON",
+    "WEB"
+  ]
+}
